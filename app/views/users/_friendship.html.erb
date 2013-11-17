@@ -1,0 +1,7 @@
+<% unless Friendship.exists?(current_user, friendship) %>
+<!-- user cant befriendship him/herself -->
+<li class="<%=cycle('odd', 'even') %>
+	user_list">
+	Show me the money
+	</li>
+<% end %>

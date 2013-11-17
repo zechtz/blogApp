@@ -1,0 +1,18 @@
+<div class="holder">
+<%= form_for @user do |f| %>
+	<p>User Name</p>
+	<%= f.text_field :username %>
+
+	<p>Email</p>
+	<%= f.text_field :email %>
+
+	<p>Password</p>
+	<%= f.password_field :password %>
+
+	<p>Confirm Password</p>
+	<%= f.password_field :password_confirmation %>
+	<p>
+	<%= f.submit %></p>
+<% end %>
+</div>
+<div id="clear"></div>

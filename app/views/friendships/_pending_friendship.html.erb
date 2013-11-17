@@ -1,0 +1,20 @@
+<li class="<%=cycle('odd', 'even') %> user_list">
+	<%= user.email %>
+	-
+	<%= user.username %>
+	<br />
+	<%=link_to "Edit", edit_user_path(user) %>
+	|
+	<%= link_to "Delete User", user_path(user), :confirm =>
+	"Are you sure?", :method => :delete %>
+	<% if logged_in? && is_admin? %>
+	<% unless administrator?(user) %>
+	|
+	<%= button_to "Set as Admin", set_as_admin_user_path(user), :remote =>
+	true, :id=>"user_#{user.id}"%>
+	<% else %>
+	<%= button_to "Make Normal User", set_as_admin_user_path(user), :remote =>
+	true, :id=>"user_#{user.id}" %>
+	<% end %>
+	<% end %>
+</li>

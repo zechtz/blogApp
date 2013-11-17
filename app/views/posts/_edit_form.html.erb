@@ -1,0 +1,14 @@
+<div class="holder">
+	<%= form_for @post do |f| %>
+	<p>Post Tile</p>
+	<%= f.text_field :title %>
+
+	<p>Friendly URL</p>
+	<%= f.text_field :slug %>
+
+	<p>Post Content</p>
+	<%= f.text_area :content %>
+
+	<p><%= f.submit %></p>
+	<% end %>
+</div>

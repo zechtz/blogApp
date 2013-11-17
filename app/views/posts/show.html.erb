@@ -1,0 +1,39 @@
+<h2>
+	<%= @post.title %></h2>
+<div class="holder content">
+	<%= simple_format(@post.content) %>
+	<% if logged_in? && can_edit?(@post) %>
+	<%=link_to "Edit Post", edit_post_path %>
+	<% end %>
+
+	<% if logged_in? && is_admin? %>
+	|
+	<%= link_to "Delete Post", post_path(@post), confirm: 'Are you sure?', method: :delete %>
+	<% end %>
+	<h3>Comments</h3>
+	<ul id="comments">
+	
+		<%= render @comments %>
+		<div id="clear"></div>
+		
+	</ul>
+		<br />
+		<input type="submit" id="show_comment_form" value="Add Comment">
+
+	<div id="comment_form">
+		<h2>Add Your Comment</h2>
+		<%= form_for(@comment, :remote=>
+		true) do |f| %>
+		<%= f.hidden_field :post_id,  {:post_id =>
+		@post.id} %>
+		<p>Your Name</p>
+		<%= f.text_field :user_name %>
+
+		<p>Comment</p>
+		<%= f.text_area :comment_content %>
+
+		<p>
+			<%= f.submit %></p>
+		<% end %></div>
+
+</div>

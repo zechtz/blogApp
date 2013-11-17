@@ -1,0 +1,31 @@
+<h2>Manage Users</h2>
+<ul id="comments">
+	<% @users.each do |user|%>
+	<% unless current_user.id == user.id %>
+
+	<li class="<%=cycle('odd', 'even') %>
+		user_list">
+		<%= user.email %>
+		<br />
+		<% if logged_in? && is_admin? %>
+		<%=link_to "Edit", edit_user_path(user) %>
+		|
+		<%= link_to "Delete User", user_path(user), :confirm =>
+		"Are you sure?", :method => :delete %>
+		<% end %>
+
+		<% if logged_in? && is_admin? %>
+		<% unless administrator?(user) %>
+
+		<%= button_to "Set as Admin", set_as_admin_user_path(user), :remote =>
+		true, :id=>"user_#{user.id}"%>
+		<% else %>
+		<%= button_to "Make Normal User", set_as_admin_user_path(user), :remote =>
+		true, :id=>"user_#{user.id}" %>
+		<% end %>
+		<% end %>
+
+		<%= friendship_status(current_user, user) %></li>
+	<% end %>
+
+	<% end %></ul>

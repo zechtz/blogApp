@@ -1,0 +1,9 @@
+<% unless Friendship.exists?(current_user, friendship) %>
+<% unless is_already_a_friendship?(friendship) %>
+<!-- user cant befriendship him/herself -->
+<li class="<%=cycle('odd', 'even') %>
+	user_list">
+	<%= friendship.username.capitalize %>
+	<%= button_to "Request Friendshipship", request_friendshipship_user_path(friendship) %></li>
+<% end %>
+<% end %>

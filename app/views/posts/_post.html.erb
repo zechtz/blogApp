@@ -1,0 +1,22 @@
+<li class="document">
+	<h3>
+		<%= link_to "#{post.title.titleize}", post_path(post) %></h3>
+	<span>
+		Posted
+		<%= time_ago_in_words(post.created_at).titleize  %>
+		Ago - By
+		<%= post.user_name %></span>
+	<div id="clear"></div>
+	<%= sanitize(truncate(post.content, :separator =>
+	' ', :length => 200)) %> 
+					&nbsp;
+	<small> <em>(
+			<%= post.comments.count %>
+			COMMENT
+			<% if post.comments.count >
+			1 %>S
+			<% end %>)</em>
+	</small>
+	<% if logged_in? && can_edit?(post) %>
+	<%= link_to "Edit this post", edit_post_path(post) %>
+	<% end %></li>
