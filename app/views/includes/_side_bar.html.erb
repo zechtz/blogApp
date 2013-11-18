@@ -1,35 +1,30 @@
-	<div class="section_left">
-		<ul id="left_nav">
-			<li class="home">
-	<%= link_to "Welcome", root_url %><% if logged_in? %><%= current_user.user_name %><% end %>
-			</li>
-			<li class="contacts">
-				
-				<%= link_to "Manage Users", manage_users_path %>
-			</li>
+<div class="section_left">
+	<ul id="left_nav">
+		<li class="home">
+			<%= link_to "Welcome ", root_url %>
 			<% if logged_in? %>
-			<li class="cases">
-				<%=link_to "Create New Post", add_post_path %>
-			</li>
-			<% end %>
-			<li class="activities">
-				<a href="#">Activy Stream</a>
-			</li>
+			<%= current_user.user_name %>
+			<% end %></li>
+		<li class="contacts">
 
-			<% if logged_in? %>
-			<% if user_has_friendship_requests?(current_user) && current_user.user_friendship_requests.count != 0 %>
-				<li class="cases">
-					<%= link_to "You have #{pluralize(current_user.user_friendship_requests.count, "request" )} Pending", pending_requests_user_path(current_user) %>
-					
-				</li> 
-			<% end %>
-			<% end %>
+			<%= link_to "Manage Users", manage_users_path %></li>
+		<% if logged_in? %>
+		<li class="cases">
+			<%=link_to "Create New Post", add_post_path %></li>
+		<% end %>
+		<li class="activities">
+			<a href="#">Activy Stream</a>
+		</li>
 
-			<%if logged_in? %>
-			<li class="cases">
-				<%= link_to "Find People", browse_people_user_path(current_user) %>
-			</li>
-			<% end %>
+		<% if logged_in? %>
+		<% if user_has_friendship_requests?(current_user) && current_user.user_friendship_requests.count != 0 %>
+		<li class="cases">
+			<%= link_to "You have #{pluralize(current_user.user_friendship_requests.count, "request" )} Pending", pending_requests_user_path(current_user) %></li>
+		<% end %>
+		<% end %>
 
-		</ul>
-	</div>
+		<%if logged_in? %>
+		<li class="cases">
+			<%= link_to "Find People", browse_people_user_path(current_user) %></li>
+		<% end %></ul>
+</div>
