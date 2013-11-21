@@ -4,5 +4,6 @@
 
 jQuery ->
 	$('#show_comment_form').click (e)->
+		e.preventDefault()
 		$('#comment_form').show(500)
 		$(this).hide()
