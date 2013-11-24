@@ -16,14 +16,13 @@
 		</li>
 
 		<% if logged_in? %>
-		<% if user_has_friendship_requests?(current_user) && current_user.friendships_to_accept_or_reject.count > 0 %>
+		<% if user_has_friendship_requests?(current_user) && current_user.friendships_to_accept_or_reject.count >
+		0 %>
 		<li class="cases">
-			<%= link_to "You have #{pluralize(current_user.user_friendship_requests.count, "request" )} Pending", pending_requests_user_path(current_user) %>
-		</li>
+			<%= link_to "You have #{pluralize(current_user.user_friendship_requests.count, "request" )} Pending", pending_requests_user_path(current_user) %></li>
 		<% end %>
 		<li class="contacts">
-			<%= link_to "Your Friends", friends_user_path(current_user) %>
-		</li>
+			<%= link_to "Your Friends", friends_user_path(current_user) %></li>
 		<% end %>
 
 		<%if logged_in? %>
