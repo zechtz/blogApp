@@ -60,6 +60,7 @@ class User < ActiveRecord::Base
     friends
   end
 
+  # people who are already our friends
   def accepted_friends
     the_friends = []
     user_accepted_friends.each do |friend|

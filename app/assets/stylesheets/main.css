@@ -304,10 +304,9 @@ ul#comments{
 
 
 /* footer */
-
 #footer{
 	margin: 0px auto;
-	width: 60%;
+	width: 59%;
 	text-align: right;
 	font-size: 1.0em;
 }

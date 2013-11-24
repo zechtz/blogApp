@@ -7,21 +7,33 @@ Blog::Application.routes.draw do
   get 'add_post' => 'posts#new', :as => 'add_post'
   resources :posts
   
+
   # users resource 
   resources :users do 
   	member do 
-       match 'set_as_admin', :via => [:post, :get]
-       get 'pending_requests' => 'users#pending_friendships', :as => 'pending_requests', :via => [:get]
-       match 'add_friend' => 'users#accept_friendship_request', 
-       :as => 'add_friend', :via => [:post, :get]
-       get 'browse_people' => 'friendships#index', :as => 'browse_people', :via =>[:get]
+       match 'set_as_admin', 
+                                    :via => [:post, :get]
+       get 'pending_requests' => 'friendships#pending_friendships', 
+                                    :as => 'pending_requests'
+       match 'add_friend' => 'friendships#accept_friendship_request', 
+                                    :as => 'add_friend', 
+                                    :via => [:post, :get]
+       get 'browse_people' => 'friendships#index', 
+                                    :as => 'browse_people'
        match 'request_friendship' => 'friendships#create', 
-       :as => 'request_friendship', :via => [:post,:get]
-       match 'reject_friendship' => 'friendships#reject_friendship', :as => 'reject_friendship', :via => [:post, :get]
+                                    :as => 'request_friendship', 
+                                    :via => [:post,:get]
+       match 'reject_friendship' => 'friendships#reject_friendship', 
+                                    :as => 'reject_friendship', 
+                                    :via => [:post, :get]
+       get 'friends' => 'friendships#show_friends',
+                                    :as => 'friends'
+       match 'unfriend' => 'friendships#destroy_friendship',
+                                    :as => 'unfriend', :via => [:post]                             
     end
   end
  # end users resource
 
   resources :sessions
-  resources :comments
+  resources :comments, :only => [:index]
 end

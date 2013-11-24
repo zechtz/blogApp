@@ -10,10 +10,9 @@
 		<% if logged_in? %>
 		<li>
 			<%= link_to "Logged in as #{current_user.user_name} (Edit Profile)", edit_user_path(current_user) %></li>
-		
-			<li>
-				<%= link_to "Log Out", log_out_path, confirm: 'Are you sure you want to log out?' %>
-			</li>
+
+		<li>
+			<%= link_to "Log Out", log_out_path, confirm: 'Are you sure you want to log out?' %></li>
 		<% else %>
 
 		<li>

@@ -1,0 +1,16 @@
+<h2>
+	You have
+	<%=@friends.count %> Friends</h2>
+
+<ul id="comments">
+	<% @friends.each do |friend| %>
+	<li class="<%=cycle('odd', 'even') %>
+		user_list">
+		<%= friend.email %>
+		<ul id="actions">
+			<li class="accept">
+				<%= button_to "Unfriend", unfriend_user_path(friend) %></li>
+
+		</ul>
+	</li>
+	<% end %></ul>

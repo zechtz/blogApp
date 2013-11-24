@@ -1,0 +1,23 @@
+<h2>Pending Friendship Requests</h2>
+<ul id="comments">
+	<% @pending.each do |friend| %>
+
+	<% if Friendship.exists?(current_user, friend) %>
+
+	<li class="<%=cycle('odd', 'even') %>
+		user_list">
+		<%= friend.username.capitalize %>
+		Would like to be your friend
+		<div id="clear"></div>
+		<ul id="actions">
+			<li class="accept">
+				<%= button_to "Accept", add_friend_user_path(friend) %></li>
+			<li class="decline">
+				<%= button_to "Decline", reject_friendship_user_path(friend) %></li>
+		</ul>
+
+	</li>
+	<div id="clear"></div>
+
+	<% end %>
+	<% end %></ul>

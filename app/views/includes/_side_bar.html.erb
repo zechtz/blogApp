@@ -6,8 +6,7 @@
 			<%= current_user.user_name %>
 			<% end %></li>
 		<li class="contacts">
-
-		<%= link_to "Manage Users", manage_users_path %></li>
+			<%= link_to "Manage Users", manage_users_path %></li>
 		<% if logged_in? %>
 		<li class="cases">
 			<%=link_to "Create New Post", add_post_path %></li>
@@ -17,10 +16,14 @@
 		</li>
 
 		<% if logged_in? %>
-		<% if user_has_friendship_requests?(current_user) && current_user.user_friendship_requests.count != 0 %>
+		<% if user_has_friendship_requests?(current_user) && current_user.friendships_to_accept_or_reject.count > 0 %>
 		<li class="cases">
-			<%= link_to "You have #{pluralize(current_user.user_friendship_requests.count, "request" )} Pending", pending_requests_user_path(current_user) %></li>
+			<%= link_to "You have #{pluralize(current_user.user_friendship_requests.count, "request" )} Pending", pending_requests_user_path(current_user) %>
+		</li>
 		<% end %>
+		<li class="contacts">
+			<%= link_to "Your Friends", friends_user_path(current_user) %>
+		</li>
 		<% end %>
 
 		<%if logged_in? %>
