@@ -8,16 +8,20 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, :dependent => :destroy
 
+  # instruct rails to use the friendly slug as the url not the post id by 
+  # overriding the to_param method
   def to_param
   	slug
   end
 
+  # generate a friendly url for posts 
   def generate_slug
   	self.slug = title.parameterize
   end
 
   attr_accessible :comments_attributes
-  accepts_nested_attributes_for :comments #, :reject_if => lambda { |a| a[:advocate_name].blank? }
+  accepts_nested_attributes_for :comments
+
 
   def user_name
     self.user.username.downcase

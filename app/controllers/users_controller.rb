@@ -1,5 +1,7 @@
 class UsersController < ApplicationController 
 
+  # these callback methods will be executed before the actions specified within the 
+  # actions array (if only is used or when except is used, those actions not specified)
   before_filter :find_user, :only => [
                                       :edit, :show, :update, 
                                       :pending_friendships, 
