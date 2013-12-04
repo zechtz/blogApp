@@ -7,8 +7,6 @@ Blog::Application.routes.draw do
   get 'add_post' => 'posts#new', :as => 'add_post'
   get 'refresh_posts' => 'home#refresh_posts', :as => 'refresh_posts'
   resources :posts
-  
-
   # users resource 
   resources :users do 
   	member do 

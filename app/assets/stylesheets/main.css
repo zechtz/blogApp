@@ -184,6 +184,12 @@ textarea#notes{
 	font-size: 1.2em;
 	color: #838280;
 }
+.preload{
+	background: url('blog/loading-2.gif') no-repeat;
+	margin: 25px auto;
+	width: 16px;
+	height: 16px;
+}
 
 .activity em{
 	font-size: 12px;
