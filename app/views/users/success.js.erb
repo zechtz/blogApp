@@ -1,0 +1,6 @@
+
+if ($('#user_<%=@user.id %>').val() == "Set as Admin"){
+	$('#user_<%=@user.id %>').val("Make Normal User");
+}else{
+	$('#user_<%=@user.id %>').val("Set as Admin");
+}

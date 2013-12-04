@@ -1,3 +1,6 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+jQuery ->
+	timelyRefreshPosts = ->
+		url = '/refresh_posts'
+		$.get url, (data,status) ->
+			$('.activity').html(data)
+	setInterval(timelyRefreshPosts,5000)

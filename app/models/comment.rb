@@ -5,6 +5,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :user_name
 
   belongs_to :post
+  belongs_to :user
   attr_accessible :post_attributes
   accepts_nested_attributes_for :post
 end

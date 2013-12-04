@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-	before_filter :find_post, :only => [:edit, :update, :destroy, :show, :correct_user]
+	
+  before_filter :find_post, :only => [:edit, :update, :destroy, :show, :correct_user]
 	before_filter :authorize_user, :except => [:show, :index]
 	before_filter :current_user, :only => [:edit, :destroy]
 	before_filter :correct_user, :only => [:edit, :destroy]

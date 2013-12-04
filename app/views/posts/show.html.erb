@@ -10,15 +10,26 @@
 	|
 	<%= link_to "Delete Post", post_path(@post), confirm: 'Are you sure?', method: :delete %>
 	<% end %>
+
+	<div id="clear"></div>
+	<ul id="fav">
+		<li class="accept">
+			<%= button_to "Thumbs Up", "#" %></li>
+		<li class="decline">
+			<%= button_to "Thumbs Down", "#" %></li>
+
+	</ul>
+	<div class="clear_fav"></div>
+
 	<h3>Comments</h3>
 	<ul id="comments">
-	
+
 		<%= render @comments %>
 		<div id="clear"></div>
-		
+
 	</ul>
-		<br />
-		<input type="submit" id="show_comment_form" value="Add Comment">
+	<br />
+	<input type="submit" id="show_comment_form" value="Add Comment">
 
 	<div id="comment_form">
 		<h2>Add Your Comment</h2>

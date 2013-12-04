@@ -5,6 +5,7 @@ Blog::Application.routes.draw do
   get 'log_out' => 'sessions#destroy', :as => 'log_out'
   get 'manage_users' => 'users#index', :as => 'manage_users'
   get 'add_post' => 'posts#new', :as => 'add_post'
+  get 'refresh_posts' => 'home#refresh_posts', :as => 'refresh_posts'
   resources :posts
   
 

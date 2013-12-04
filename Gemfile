@@ -40,3 +40,5 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'hirb'

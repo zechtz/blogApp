@@ -5,8 +5,10 @@
 			<% if logged_in? %>
 			<%= current_user.user_name %>
 			<% end %></li>
+			<% if logged_in? && is_admin? %>
 		<li class="contacts">
 			<%= link_to "Manage Users", manage_users_path %></li>
+			<% end %>
 		<% if logged_in? %>
 		<li class="cases">
 			<%=link_to "Create New Post", add_post_path %></li>

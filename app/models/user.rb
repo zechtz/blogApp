@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :friendships
   has_many :friends, :through => :friendships
   before_save :encrypt_password, :unless => Proc.new {|u| u.password.blank?}
+  has_many :comments
 
   validates :password, :presence => true, :confirmation => true, :on => :create
   validates :username, :uniqueness => true, :on => :create

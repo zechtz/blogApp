@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if admin_user
       format.html {redirect_to manage_users_path, :notice => "Successfully set #{@user.email} as admin"}
-      format.js {flash[:notice] = "Successfully set #{@user.email} as administrator"}
+      format.js { }
     else
       redirect_to manage_users_path, :alert => "Could not complete the tast"
     end

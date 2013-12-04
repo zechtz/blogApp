@@ -1,3 +1,4 @@
+<% @posts.each do |post| %>
 <li class="document" id="post_<%=post.id %>">
 	<h3>
 		<%= link_to "#{truncate(post.title.titleize, :separator => ' ', :length => 60)}", post_path(post) %></h3>
@@ -31,3 +32,4 @@
 	</ul>
 	<div id="clear"></div>
 </li>
+<% end %>
