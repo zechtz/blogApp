@@ -7,18 +7,6 @@ class HomeController < ApplicationController
   	
   end
 
-  def vote_up
-     @post.ups = @post.ups+1
-     @post.save
-     render :text => "<div class='up'></div>"+@post.ups.to_s+" likes"
-  end
-
-  def vote_down
-    @post.downs = @post.downs+1
-    @post.save
-    render :text => "<div class='down'></div>"+@scribble.downs.to_s+" dislikes"
- end
-
  def refresh_posts
   render :partial => 'post.html.erb', :locals => { :posts => @posts }
  end
