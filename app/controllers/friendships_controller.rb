@@ -51,7 +51,4 @@ class FriendshipsController < ApplicationController
 		@friend = User.find(params[:id])
 	end
 
-	def authorize_user
-  		redirect_to log_in_path, :notice => "You must be logged in to do that" unless logged_in?
- 	end
 end

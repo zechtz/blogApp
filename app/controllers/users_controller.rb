@@ -79,10 +79,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def authorize_user
-    redirect_to log_in_path, :notice => "You must be logged in to do that" unless logged_in?
-  end
-
   def admin_only
     redirect_to root_url, :alert => 'Only Admin can access this resource' unless is_admin?
   end

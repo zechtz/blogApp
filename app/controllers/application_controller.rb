@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   
   protect_from_forgery
+
+  include SessionHelper
   
   helper_method :current_user
   helper_method :logged_in?
@@ -14,7 +16,7 @@ class ApplicationController < ActionController::Base
   helper_method :user_has_friendship_requests?
   helper_method :pending_friendships
   helper_method :is_already_a_friend?
-  
+  helper_method :authorize_user
   private
   def current_user
 	  @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -82,4 +84,12 @@ class ApplicationController < ActionController::Base
   def is_already_a_friend?(user)
     true if current_user.accepted_friends.include?(user)
   end
+
+  def authorize_user
+    unless logged_in?
+      store_location
+      redirect_to log_in_path, :notice => "You must be logged in to do that"
+    end
+  end
+
 end

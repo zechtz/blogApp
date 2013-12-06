@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  # after_filter :reload_comments, only: [:create]
  
   def new
   	@comment = Comment.new
@@ -19,5 +20,6 @@ class CommentsController < ApplicationController
     	end
     end
   end
+
 
 end

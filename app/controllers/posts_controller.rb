@@ -53,10 +53,6 @@ class PostsController < ApplicationController
   	@post = Post.find_by_slug(params[:id])
   end
 
-  def authorize_user
-  	redirect_to log_in_path, :notice => "You must be logged in to do that" unless logged_in?
-  end
-
   def correct_user
   	redirect_to root_url, :notice => "You are not authorized to do that" unless is_admin? || can_manage(@post)
   end
