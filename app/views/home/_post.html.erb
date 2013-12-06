@@ -11,12 +11,9 @@
 	<%= sanitize(truncate(post.content, :separator =>
 	' ', :length => 200)) %> 
 					&nbsp;
-	<small> <em>(
-			<%= post.comments.count %>
-			COMMENT
-			<% if post.comments.count >
-			1 %>S
-			<% end %>)</em>
+	<small> 
+		<em>(<%= pluralize(post.comments.count, "comment").upcase %>)
+		</em>
 	</small>
 
 	<% if logged_in? && can_edit?(post) %>
