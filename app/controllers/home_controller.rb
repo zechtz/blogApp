@@ -17,8 +17,8 @@ class HomeController < ApplicationController
  end
 
  def get_post
-  	 @post = Post.find_by_slug!(params[:id])
-  end 
+  @post = Post.find_by_slug!(params[:id])
+ end 
 
 end
 

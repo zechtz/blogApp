@@ -15,28 +15,16 @@
 
 	<h3>Comments</h3>
 	<ul id="comments">
-
 		<%= render @comments %>
 		<div id="clear"></div>
 
 	</ul>
 	<br />
-	<input type="submit" id="show_comment_form" value="Add Comment">
+
+	<%= button_to "Add Comment", new_post_comment_post_path(@post), {:method => :get, :remote => true, :id => "new_comment_button"} %>
 
 	<div id="comment_form">
-		<h2>Add Your Comment</h2>
-		<%= form_for(@comment, :remote=>
-		true) do |f| %>
-		<%= f.hidden_field :post_id,  {:post_id =>
-		@post.id} %>
-		<p>Your Name</p>
-		<%= f.text_field :user_name %>
-
-		<p>Comment</p>
-		<%= f.text_area :comment_content %>
-
-		<p>
-			<%= f.submit %></p>
-		<% end %></div>
+		<!-- new comment form will be rendered here -->
+	</div>
 
 </div>

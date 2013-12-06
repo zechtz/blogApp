@@ -6,7 +6,14 @@ Blog::Application.routes.draw do
   get 'manage_users' => 'users#index', :as => 'manage_users'
   get 'add_post' => 'posts#new', :as => 'add_post'
   get 'refresh_posts' => 'home#refresh_posts', :as => 'refresh_posts'
-  resources :posts
+
+  resources :posts do 
+    member do 
+      get 'new_post_comment' => 'posts#new_post_comment', :as => 'new_post_comment'
+    end
+  end
+  
+
   # users resource 
   resources :users do 
   	member do 
@@ -34,5 +41,5 @@ Blog::Application.routes.draw do
  # end users resource
 
   resources :sessions
-  resources :comments, :only => [:index]
+  resources :comments
 end

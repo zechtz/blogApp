@@ -6,12 +6,19 @@ class PostsController < ApplicationController
 	before_filter :correct_user, :only => [:edit, :destroy]
 	
   def show
-  	@comment = @post.comments.build
-    @comments = @post.comments.all 
+    @comments = @post.comments.all
   end
 
   def new
   	@post = current_user.posts.build
+  end
+
+  def new_post_comment
+    @post = Post.find_by_slug!(params[:id])
+    @comment = @post.comments.build
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
@@ -21,7 +28,7 @@ class PostsController < ApplicationController
   	else
   		render 'new'
   		flash[:alert] = "Could not create post"
-  	end  	
+  	end
   end
 
   def edit

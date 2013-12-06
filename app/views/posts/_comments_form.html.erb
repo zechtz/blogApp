@@ -1,0 +1,18 @@
+<div id="the_form">
+<h2>Add Your Comment</h2>
+
+<%= form_for(@comment, :remote=>
+true) do |f| %>
+
+<%= f.hidden_field :user_id,  {:user_id => current_user.id, value: current_user.id} %>
+<%= f.hidden_field :post_id, {:post_id => @post.id} %>
+<p>Your Name</p>
+<%= f.text_field :user_name %>
+
+<p>Comment</p>
+<%= f.text_area :comment_content %>
+
+<p>
+	<%= f.submit "Add Comment" %></p>
+<% end %>
+</div>

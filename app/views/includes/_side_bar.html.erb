@@ -4,7 +4,10 @@
 			<%= link_to "Welcome ", root_url %>
 			<% if logged_in? %>
 			<%= current_user.user_name %>
-			<% end %></li>
+			<% else %>
+			Guest
+			<% end %>
+		</li>
 			<% if logged_in? && is_admin? %>
 		<li class="contacts">
 			<%= link_to "Manage Users", manage_users_path %></li>
