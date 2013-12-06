@@ -9,11 +9,10 @@ class CommentsController < ApplicationController
 
   def create
   	@comment = Comment.new( params[:comment])
-  	@post = Post.find(params[:comment][:post_])
     respond_to do |format|
     	if @comment.save
-    		format.html {redirect_to post_path(@post), :notice => "Successfully Commented"}
-        format.js {}
+    		format.html {redirect_to posts_path, :notice => "Successfully Commented"}
+        format.js
     	else
     		render 'new'
     		flash[:alert] = "There was an error"
