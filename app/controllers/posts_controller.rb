@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
 	
-  before_filter :find_post, :only => [:edit, :update, :destroy, :show, :correct_user]
-	before_filter :authorize_user, :except => [:show, :index]
+  before_filter :find_post, :only => [:edit, :update, :destroy, :show, :ensure_correct_user]
+	before_filter :authorize_user, :except => [:show, :index, :new_post_comment]
 	before_filter :current_user, :only => [:edit, :destroy]
-	before_filter :correct_user, :only => [:edit, :destroy]
+	before_filter :ensure_correct_user, :only => [:edit, :destroy]
 	
   def show
     @comments = @post.comments.all
@@ -14,6 +14,7 @@ class PostsController < ApplicationController
   end
 
   def new_post_comment
+    
     @post = Post.find_by_slug!(params[:id])
     @comment = @post.comments.build
     respond_to do |format|
@@ -53,7 +54,7 @@ class PostsController < ApplicationController
   	@post = Post.find_by_slug(params[:id])
   end
 
-  def correct_user
+  def ensure_correct_user
   	redirect_to root_url, :notice => "You are not authorized to do that" unless is_admin? || can_manage(@post)
   end
 

@@ -5,13 +5,13 @@ class UsersController < ApplicationController
   before_filter :find_user, :only => [
                                       :edit, :show, :update, 
                                       :pending_friendships, 
-                                      :correct_user, 
+                                      :ensure_correct_user, 
                                       :set_as_admin,
                                     ]
 
   before_filter :authorize_user, :except => [:new, :show, :create]
   before_filter :current_user, :only => [:index]
-  before_filter :correct_user, :only => [:edit, :destroy, :update]
+  before_filter :ensure_correct_user, :only => [:edit, :destroy, :update]
   before_filter :admin_only, :only => [:index, :set_as_admin]
   before_filter :skip_password_attribute, :only => [:update]
 
@@ -83,7 +83,7 @@ class UsersController < ApplicationController
     redirect_to root_url, :alert => 'Only Admin can access this resource' unless is_admin?
   end
 
-  def correct_user
+  def ensure_correct_user
     redirect_to root_url, :notice => "You are not authorized to do that" unless is_admin? || can_manage_user(@user)
   end
 end

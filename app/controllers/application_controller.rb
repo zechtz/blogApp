@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   helper_method :user_has_friendship_requests?
   helper_method :pending_friendships
   helper_method :is_already_a_friend?
-  helper_method :authorize_user
+  
   private
   def current_user
 	  @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -85,6 +85,8 @@ class ApplicationController < ActionController::Base
     true if current_user.accepted_friends.include?(user)
   end
 
+  # since this method is used by almost all controllers i have moved it to the 
+  # application controller after refactoring the codebase
   def authorize_user
     unless logged_in?
       store_location

@@ -5,6 +5,11 @@ class Post < ActiveRecord::Base
   validates_presence_of :title, :uniqueness => true
   validates_presence_of :content
 
+  
+  scope :by_newest, order("created_at DESC")
+  default_scope by_newest
+
+
   belongs_to :user
   has_many :comments, :dependent => :destroy
 

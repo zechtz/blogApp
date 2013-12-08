@@ -1,9 +1,6 @@
 <li class="<%= cycle('odd' , 'even' ) %>" id="comment_<%= comment.id %>"> 
-	<% if comment.user %>
+	
 	<b><%= comment.user.username %></b>
-	<% else %>
-	<b><%= comment.user_name %></b>
-	<% end %>
 	<br />
 	<%= comment.comment_content %>
 </li>

@@ -93,4 +93,32 @@ class User < ActiveRecord::Base
     the_aceepted_friends = self.friendships.where(:status => 'accepted').pluck(:friend_id)
   end
 
+  # user should only see posts by himself and his friends 
+  def wall_posts
+    # in ruby you can add arrays by just doing array1 + array2 
+    # and that will return a combined array containing all the stuff 
+    # in both arrays
+    friends_posts + my_posts
+  end
+
+  # loop through user's posts and add them to an arry of posts then return that array
+  private
+  def my_posts
+    the_posts = []
+    self.posts.each do |post|
+      the_posts.push(post)
+    end
+    the_posts
+  end
+
+  # loop through each friend, then add each friend's posts to an array and return
+  # the array of friends posts 
+  def friends_posts
+    post_feeds = []
+    accepted_friends.each do |friend|
+      post_feeds += friend.posts
+    end
+    post_feeds
+  end
+
 end

@@ -31,7 +31,7 @@ class FriendshipsController < ApplicationController
   	def destroy_friendship
 	    @friendship_to_destroy = Friendship.breakup(@user, @friend)
 	    if @friendship_to_destroy
-	      redirect_to my_friends_user_path(@user), :notice => "You are no longer friends with #{@friend.user_name}"
+	      redirect_to friends_user_path(@user), :notice => "You are no longer friends with #{@friend.user_name}"
 	    else
 	      flash[:alert] = "Could not unfriend #{@friend.user_name}"
 	   end

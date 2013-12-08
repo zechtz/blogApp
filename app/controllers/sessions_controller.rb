@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   	user = User.authenticate(params[:email], params[:password])
   	if user 
   		session[:user_id] = user.id
-      redirect_back_or user
+      redirect_back_or root_path
   		flash[:notice] = 'Successfully Logged In'
   	else
   		flash[:alert] = "Wrong Password / Email Combination"
@@ -16,6 +16,6 @@ class SessionsController < ApplicationController
 
   def destroy
   	session[:user_id] = nil
-  	redirect_to root_url, :notice => 'Successfully Logged Out'
+  	redirect_to root_path, :notice => 'Successfully Logged Out'
   end
 end

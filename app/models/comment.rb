@@ -1,8 +1,7 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :comment_content, :user_name, :post_id, :user_id
+  attr_accessible :comment_content, :post_id, :user_id
 
   validates_presence_of :comment_content
-  validates_presence_of :user_name
 
   belongs_to :post
   belongs_to :user

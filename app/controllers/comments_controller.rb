@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
-  # after_filter :reload_comments, only: [:create]
- 
+  
   def new
   	@comment = Comment.new
     respond_to do |format|
