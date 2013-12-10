@@ -45,9 +45,9 @@ class UsersController < ApplicationController
 
   def update
   	# if params[:user][:password].blank?
-   #    params[:user].delete :password
-   #    params[:user].delete :password_confirmation
-   #  end 
+    # params[:user].delete :password
+    # params[:user].delete :password_confirmation
+    # end 
     # params[:user].delete(:password) if params[:user][:password].blank?
   	if @user.update_attributes(params[:user])
   		redirect_to root_url, :notice => 'Successfully Updated Profile'
@@ -57,13 +57,8 @@ class UsersController < ApplicationController
   	end
   end
 
-  def user_posts
-    @user = User.find(params[:id])
-    @posts = @user.my_posts
-  end
-
   def set_as_admin
-    admin_user = User.make_admin(@user)
+    admin_user = User.set_user_as_admin(@user)
     respond_to do |format|
       if admin_user
       format.html {redirect_to manage_users_path, :notice => "Successfully set #{@user.email} as admin"}
@@ -72,6 +67,11 @@ class UsersController < ApplicationController
       redirect_to manage_users_path, :alert => "Could not complete the tast"
     end
     end
+  end
+
+  def user_posts
+    @user = User.find(params[:id])
+    @posts = @user.my_posts
   end
 
   def find_user

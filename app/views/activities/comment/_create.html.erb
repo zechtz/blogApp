@@ -1,1 +1,1 @@
-commented on a post <%= link_to activity.trackable.post.title, activity.trackable.post %>
+commented on a post <%= link_to activity.trackable.post.title, activity.trackable.post %> (<%= time_ago_in_words(activity.trackable.created_at) %> ago)

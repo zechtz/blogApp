@@ -22,7 +22,7 @@ class FriendshipsController < ApplicationController
 	def accept
 	    @friendship = Friendship.accept(@user, @friend)
 	    if @friendship
-	      track_activity(@friendship)
+	      # track_activity(@friendship)
 	      redirect_to root_url, :notice => "You are now friends with #{@friend.username}"
 	    else
 	      flash[:error] = "There was an error"

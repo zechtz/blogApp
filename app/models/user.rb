@@ -4,11 +4,11 @@ class User < ActiveRecord::Base
                   :password, :password_confirmation, :admin
   attr_accessor :password, :remember_me
 
-  has_many :activities
+  has_many :activities, :dependent => :destroy
   has_many :posts
   has_many :friendships
   has_many :friends, :through => :friendships
-  has_many :comments
+  has_many :comments, :dependent => :destroy
   before_save :encrypt_password, 
               :unless => Proc.new {|u| u.password.blank?}
   
@@ -24,14 +24,6 @@ class User < ActiveRecord::Base
   		self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
   	end
   end
-
-  # def update_attributes(params)
-  #   if params[:password].blank?
-  #     params.delete :password
-  #     params.delete :password_confirmation
-  #     super params
-  #   end    
-  # end
 
   def password_changed?
     !@password.blank?    
@@ -50,7 +42,7 @@ class User < ActiveRecord::Base
     username
   end
 
-  def self.make_admin(user)
+  def self.set_user_as_admin(user)
     admin_user = find_by_id(user)
     admin_user = user.toggle(:admin)
     admin_user.save 
@@ -74,6 +66,7 @@ class User < ActiveRecord::Base
     the_friends
   end
 
+  # pending friends
   def pending_friends
     friends = []
     the_friends = Friendship.find(user_friendship_requests)
@@ -95,17 +88,16 @@ class User < ActiveRecord::Base
     the_aceepted_friends = self.friendships.where(:status => 'accepted').pluck(:friend_id)
   end
 
-  # user should only see posts by himself and his friends 
+  # user should only see posts by him/herself and his/her friends 
   def wall_posts
     # in ruby you can add arrays by just doing array1 + array2 
     # and that will return a combined array containing all the stuff 
     # in both arrays
-
     (friends_posts + my_posts).sort {|v1,v2| v2.id <=> v1.id}
-   
+    # the <=> is a method in the enumerable class used to sort collection objects
   end
 
-  # loop through user's posts and add them to an arry of posts then return that array
+  # loop through user's posts and add them to an array of posts then return that array
   def my_posts
     the_posts = []
     self.posts.each do |post|
@@ -124,5 +116,4 @@ class User < ActiveRecord::Base
     end
     post_feeds
   end
-
 end

@@ -1,0 +1,2 @@
+      invoke  active_record
+      remove    db/migrate/20131210074645_add_status_to_posts.rb

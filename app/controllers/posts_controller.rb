@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   def show
     @comments = @post.comments.all
   end
-
+  
   def new
   	@post = current_user.posts.build
   end
@@ -54,7 +54,6 @@ class PostsController < ApplicationController
 
   def destroy
   	if @post.delete
-      track_activity(@post)
   		redirect_to root_url, :notice => 'Successfully deleted'
   	end
   end

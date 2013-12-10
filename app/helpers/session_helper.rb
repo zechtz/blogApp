@@ -2,8 +2,8 @@ module SessionHelper
 
   # redirect visitor to the page he / she was trying to access before login in or just 
   # use the default redirect set in the controller action 
-  def redirect_back_or(default)
-    redirect_to(session[:return_to] || default)
+  def redirect_back_or(default_path)
+    redirect_to(session[:return_to] || default_path)
     session.delete(:return_to)
   end
 
