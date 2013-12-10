@@ -19,9 +19,10 @@ class FriendshipsController < ApplicationController
 		redirect_to browse_people_user_path, :notice => "Friendship request rejected"
 	end
 
-	def accept_friendship_request
+	def accept
 	    @friendship = Friendship.accept(@user, @friend)
 	    if @friendship
+	      track_activity(@friendship)
 	      redirect_to root_url, :notice => "You are now friends with #{@friend.username}"
 	    else
 	      flash[:error] = "There was an error"

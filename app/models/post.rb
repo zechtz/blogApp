@@ -3,15 +3,16 @@ class Post < ActiveRecord::Base
   after_validation :generate_slug
 
   validates_presence_of :title, :uniqueness => true
+  validates_uniqueness_of :slug
   validates_presence_of :content
 
   
   scope :by_newest, order("created_at DESC")
   default_scope by_newest
 
-
   belongs_to :user
   has_many :comments, :dependent => :destroy
+  # after_create {|post| Activity.create! action: "create", trackable: post }
 
   # instruct rails to use the friendly slug as the url not the post id by 
   # overriding the to_param method

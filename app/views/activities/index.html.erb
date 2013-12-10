@@ -1,0 +1,17 @@
+<h1>Activity Feed</h1>
+<!-- Section left starts -->
+<div id="float_left">
+	<div id="clear">
+		<!-- List Activities Starting here -->
+		<ul class="activities">
+			<% @activities.each do |activity| %>
+				<% if activity.present? %>
+				<%= content_tag_for(:li, activity, class: "list") do %>
+					<%= link_to activity.user.user_name, activity.user %>
+				<%= render "activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity %>
+				<% end %>
+				<% end %>
+			<% end %>
+			<div id="clear"></div>
+		</ul>
+		<!-- List activities ends here -->

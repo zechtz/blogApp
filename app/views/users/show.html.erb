@@ -1,2 +1,12 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h2><%= @user.user_name %>'s Profile</h2>
+<!-- Section left starts -->
+<div id="float_left">
+	<%= link_to "#{@user.posts.count}", user_posts_user_path(@user) %>
+	<div id="clear">
+		<!-- List Activities Starting here -->
+		<ul>
+
+			<!-- this is where the posts will be refreshed  -->
+			<div id="clear"></div>
+		</ul>
+		<!-- List activities ends here -->

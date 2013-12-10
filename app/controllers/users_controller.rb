@@ -57,6 +57,11 @@ class UsersController < ApplicationController
   	end
   end
 
+  def user_posts
+    @user = User.find(params[:id])
+    @posts = @user.my_posts
+  end
+
   def set_as_admin
     admin_user = User.make_admin(@user)
     respond_to do |format|

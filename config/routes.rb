@@ -1,4 +1,7 @@
 Blog::Application.routes.draw do
+  resources :activities
+
+
   root :to => 'home#index'
   get 'sign_up' => 'users#new', :as => 'sign_up'
   get 'log_in' => 'sessions#new', :as => 'log_in'
@@ -6,6 +9,7 @@ Blog::Application.routes.draw do
   get 'manage_users' => 'users#index', :as => 'manage_users'
   get 'add_post' => 'posts#new', :as => 'add_post'
   get 'refresh_posts' => 'home#refresh_posts', :as => 'refresh_posts'
+
 
   resources :posts do 
     member do 
@@ -21,7 +25,7 @@ Blog::Application.routes.draw do
                                     :via => [:post, :get]
        get 'pending_requests' => 'friendships#pending_friendships', 
                                     :as => 'pending_requests'
-       match 'add_friend' => 'friendships#accept_friendship_request', 
+       match 'add_friend' => 'friendships#accept', 
                                     :as => 'add_friend', 
                                     :via => [:post, :get]
        get 'browse_people' => 'friendships#index', 
@@ -35,7 +39,8 @@ Blog::Application.routes.draw do
        get 'friends' => 'friendships#show_friends',
                                     :as => 'friends'
        match 'unfriend' => 'friendships#destroy_friendship',
-                                    :as => 'unfriend', :via => [:post]                             
+                                    :as => 'unfriend', :via => [:post]  
+       get 'user_posts' => 'users#user_posts', :as => 'user_posts'                                                       
     end
   end
  # end users resource

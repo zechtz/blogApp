@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
   	@comment = Comment.new( params[:comment])
     respond_to do |format|
     	if @comment.save
+        track_activity(@comment)
     		format.html {redirect_to posts_path, :notice => "Successfully Commented"}
         format.js
     	else

@@ -2,7 +2,9 @@ class User < ActiveRecord::Base
 	require 'bcrypt'
   attr_accessible :email, :password_hash, :password_salt, :username, 
                   :password, :password_confirmation, :admin
-  attr_accessor :password
+  attr_accessor :password, :remember_me
+
+  has_many :activities
   has_many :posts
   has_many :friendships
   has_many :friends, :through => :friendships
@@ -45,7 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def user_name
-    username.downcase
+    username
   end
 
   def self.make_admin(user)
@@ -98,11 +100,12 @@ class User < ActiveRecord::Base
     # in ruby you can add arrays by just doing array1 + array2 
     # and that will return a combined array containing all the stuff 
     # in both arrays
-    friends_posts + my_posts
+
+    (friends_posts + my_posts).sort {|v1,v2| v2.id <=> v1.id}
+   
   end
 
   # loop through user's posts and add them to an arry of posts then return that array
-  private
   def my_posts
     the_posts = []
     self.posts.each do |post|
@@ -111,6 +114,7 @@ class User < ActiveRecord::Base
     the_posts
   end
 
+  private
   # loop through each friend, then add each friend's posts to an array and return
   # the array of friends posts 
   def friends_posts

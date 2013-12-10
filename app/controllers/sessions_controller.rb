@@ -3,9 +3,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-  	user = User.authenticate(params[:email], params[:password])
-  	if user 
-  		session[:user_id] = user.id
+  	@user = User.authenticate(params[:email], params[:password])
+  	if @user 
+  		session[:user_id] = @user.id
+      if @user.remember_me == "1"
+        cookies[:remember_me] = { :value => "1", :expires => 10.years.from_now }
+      end
       redirect_back_or root_path
   		flash[:notice] = 'Successfully Logged In'
   	else
